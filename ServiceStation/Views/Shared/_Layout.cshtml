@@ -7,7 +7,16 @@
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
-    <header>Welcome to ServiceStation</header>
+    <h1>ServiceStation</h1>
+    <div>
+        <ul>
+            <li><a asp-page="/Index">Home</a></li>
+            <li><a asp-page="/Restaurants/List">Shop</a></li>
+            <li><a asp-page="/About">Service</a></li>
+            <li><a asp-page="/Contact">Contact</a></li>
+        </ul>
+    </div>
+
     <section>
         @RenderBody()
     </section>
