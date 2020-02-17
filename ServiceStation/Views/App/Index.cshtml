@@ -2,20 +2,55 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="product-info">
-    <div>
-        <img src="~/img/process.png" width="50px" />
-        <h2>Best bike service in your city!</h2>
-        <p>We are professional. We work on modern toolsand our service is fully equipped.</p>
-    </div>
-    <div>
-        <h2>Complex service</h2>
-        <p>We will fix every issue.</p>
-    <button id="orderButton">Order</button>
-    </div>
-    <div>
-        <h2>Shop</h2>
-        <p>At our shop you can buy literally everyting.</p>
-        <button>Go to shop</button>
+
+<div class="container text-center">
+    <h1 class="display-3">Hello, world!</h1>
+    <p>This is a template for a simple marketing or informational website. It includes a large callout called a jumbotron and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
+    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more »</a></p>
+</div>
+
+<div class="container fluid">
+    <div class="card-deck mb-3 text-center">
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <img src="~/img/process.png" width="50px" style="float:left" />
+                <h5 class="my-0 font-weight-normal">ServiceStation</h5>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Certified proffessionals</li>
+                    <li>Locally owned & operated</li>
+                    <li>25 years in business</li>
+                </ul>
+                <a type="button" class="btn btn-lg btn-block btn-primary" asp-controller="App" asp-action="About">Learn more</a>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Shop</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Wide product range</li>
+                    <li>Helpfull staff</li>
+                    <li>Low prices</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Learn more</button>
+            </div>
+        </div>
+        <div class="card mb-4 box-shadow">
+            <div class="card-header">
+                <h4 class="my-0 font-weight-normal">Service</h4>
+            </div>
+            <div class="card-body">
+                <ul class="list-unstyled mt-3 mb-4">
+                    <li>Expert mechanics</li>
+                    <li>Helpfull staff</li>
+                    <li>Quick & professional</li>
+                </ul>
+                <button type="button" class="btn btn-lg btn-block btn-primary">Learn more</button>
+            </div>
+        </div>
     </div>
 </div>
+
