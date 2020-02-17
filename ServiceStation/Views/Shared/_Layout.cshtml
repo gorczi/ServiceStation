@@ -3,21 +3,20 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>ServiceStation: @ViewBag.Title</title>
+    <title>@ViewBag.Title - ServiceStation</title>
     <link href="~/css/site.css" rel="stylesheet" />
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="#">Navbar</a>
+    <nav class="navbar navbar-expand-md navbar-light bg-info">
+        <a class="navbar-brand" asp-controller="App" asp-action="Index">ServiceStation</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
-
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" asp-controller="App" asp-action="Index">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -33,18 +32,21 @@
                 <li class="nav-item">
                     <a class="nav-link" href="#">Service</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" asp-controller="App" asp-action="About">About</a>
+                </li>
             </ul>
         </div>
     </nav>
 
-    <section>
+    <div class="container body-content">
         @RenderBody()
-    </section>
-    <footer class="border-top footer text-muted">
-        <div class="container">
+        <footer class="border-top footer text-muted">
+        <div class="container text-center">
             &copy; 2020 - ServiceStation
         </div>
     </footer>
+    </div>
     <script src="~/js/index.js"></script>
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
