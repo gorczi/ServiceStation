@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ServiceStation.Core.Services
 {
-    public interface IProductData
+    public interface IProductRepository
     {
         IEnumerable<Product> GetAll();
         Product Get(int id);
