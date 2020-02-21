@@ -20,5 +20,15 @@ namespace ServiceStation.Controllers
         {
             return View(productRepository.GetAll());
         }
+
+        public IActionResult Details(int id)
+        {
+            var model = productRepository.Get(id);
+            if (model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
+        }
     }
 }
