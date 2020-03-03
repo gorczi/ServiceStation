@@ -1,26 +1,37 @@
-﻿@page "{productId:int}" 
-@model Product 
+﻿@page "{productId:int}"
+@model Product
 @{ ViewBag.Title = "Details"; }
 
-<h2>Details for @Model.Manufacturer - @Model.Name</h2>
+<h1>Details for @Html.DisplayFor(model => model.Manufacturer) @Html.DisplayFor(model => model.Name)</h1>
 
 <div>
-  <h4>Product</h4>
-  <hr />
-  <dl class="dl-horizontal">
-    <dt>
-      @Model.Name
-    </dt>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
 
-    <dd>
-      @Model.Name
-    </dd>
-    <dt>
-      @Model.Category
-    </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
 
-    <dd>
-      @Model.Category
-    </dd>
-  </dl>
+        <dd>
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Price)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Price)
+        </dd>
+    </dl>
 </div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
