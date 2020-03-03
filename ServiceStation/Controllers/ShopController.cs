@@ -16,11 +16,13 @@ namespace ServiceStation.Controllers
             this.productRepository = productRepository;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View(productRepository.GetAll());
         }
 
+        [HttpGet]
         public IActionResult Details(int id)
         {
             var model = productRepository.Get(id);

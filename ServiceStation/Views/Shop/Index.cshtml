@@ -16,8 +16,7 @@
                 <p class="card-text">@item.Manufacturer</p>
                 <p class="card-text"><small class="text-muted">@item.Category <br /> @item.Description</small></p>
                 <div class="row">
-                    <button type="button" class="btn btn-labeled btn-primary">
-                        <span class="glyphicon glyphicon-camera"></span>Details</button>
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) 
                 </div>
             </div>
         </div>
