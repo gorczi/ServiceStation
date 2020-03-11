@@ -1,37 +1,54 @@
-﻿@page "{productId:int}"
-@model Product
-@{ ViewBag.Title = "Details"; }
+﻿@model ServiceStation.Core.Domain.Product
 
-<h1>Details for @Html.DisplayFor(model => model.Manufacturer) @Html.DisplayFor(model => model.Name)</h1>
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h1>Details for</h1>
 
 <div>
     <h4>Product</h4>
     <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Manufacturer)
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Id)
         </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Manufacturer)
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Id)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Manufacturer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Manufacturer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Category)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Category)
+        </dd>
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Price)
         </dt>
-
-        <dd>
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Price)
         </dd>
     </dl>
 </div>
-<p>
-    @Html.ActionLink("Back to List", "Index")
-</p>
-
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    <a asp-action="Index">Back to List</a>
+</div>
