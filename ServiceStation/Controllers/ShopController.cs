@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using ServiceStation.Core.Domain;
 using ServiceStation.Core.Services;
 
 namespace ServiceStation.Controllers
@@ -33,8 +34,21 @@ namespace ServiceStation.Controllers
             return View(model);
         }
 
+        [HttpGet]
         public IActionResult Create()
         {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                productRepository.Add(product);
+                return View();
+            }
             return View();
         }
     }
