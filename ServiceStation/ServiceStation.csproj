@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.DotNet.Watcher.Tools" Version="2.0.2" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.1" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ServiceStation.Core\ServiceStation.Core.csproj" />
+  </ItemGroup>
 </Project>
