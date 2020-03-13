@@ -9,12 +9,14 @@ namespace ServiceStation.Core.Domain
         public int Id { get; set; }
         
         [Required]
+        [MaxLength(50)]
         public string Name { get; set; }
 
         [Required]
+        [MaxLength(50)]
         public string Manufacturer { get; set; }
 
-
+        [MaxLength(255)]
         public string Description { get; set; }
 
         [Required]
@@ -22,7 +24,7 @@ namespace ServiceStation.Core.Domain
         public Category Category { get; set; }
 
         [Required]
-        [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:c}")]
+        [DataType(DataType.Currency)]
         public decimal Price { get; set; }
 
     }

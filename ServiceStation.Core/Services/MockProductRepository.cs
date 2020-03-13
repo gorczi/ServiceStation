@@ -9,7 +9,7 @@ namespace ServiceStation.Core.Services
 {
     public class MockProductRepository : IProductRepository
     {
-        List<Product> products; 
+        List<Product> products;
 
         public MockProductRepository()
         {
@@ -30,6 +30,19 @@ namespace ServiceStation.Core.Services
         public Product Get(int id)
         {
             return products.FirstOrDefault(r => r.Id == id);
+        }
+
+        public void Update(Product product)
+        {
+            var existing = Get(product.Id);
+            if (existing != null)
+            {
+                existing.Name = product.Name;
+                existing.Manufacturer = product.Manufacturer;
+                existing.Description = product.Description;
+                existing.Category = product.Category;
+                existing.Price = product.Price;
+            }
         }
 
         public IEnumerable<Product> GetAll()

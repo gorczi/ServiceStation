@@ -47,9 +47,32 @@ namespace ServiceStation.Controllers
             if (ModelState.IsValid)
             {
                 productRepository.Add(product);
-                return View();
+                return RedirectToAction("Details", new { id = product.Id });
             }
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(int id)
+        {
+            var model = productRepository.Get(id);
+            if (model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(Product product)
+        {
+            if (ModelState.IsValid)
+            {
+                
+                return RedirectToAction("Details", new { id = product.Id });
+            }
+            return View(product);
         }
     }
 }
