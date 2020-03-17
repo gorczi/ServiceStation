@@ -69,7 +69,7 @@ namespace ServiceStation.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                productRepository.Update(product);
                 return RedirectToAction("Details", new { id = product.Id });
             }
             return View(product);

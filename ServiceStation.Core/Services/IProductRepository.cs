@@ -12,5 +12,6 @@ namespace ServiceStation.Core.Services
         IEnumerable<Product> GetAll();
         Product Get(int id);
         void Add(Product product);
+        void Update(Product product);
     }
 }
