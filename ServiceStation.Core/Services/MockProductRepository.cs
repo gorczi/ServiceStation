@@ -15,16 +15,17 @@ namespace ServiceStation.Core.Services
         {
             products = new List<Product>()
             {
-                new Product { Id = 0, Name = "Scale 520", Category = Category.Bike, Manufacturer = "Scott", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis. Donec ac ipsum sit amet leo blandit tincidunt non nec mi. Ut pulvinar consequat ex at efficitur. Vestibulum tempor dui a tempus varius. Phasellus at turpis imperdiet, tempor mauris id, hendrerit libero. Nunc eu eros maximus, commodo ante nec, rhoncus augue. Quisque vestibulum rutrum orci a venenatis. Fusce auctor at nunc sed condimentum. ", Price = 999 },
-                new Product { Id = 1, Name = "Mule 910", Category = Category.Accessory, Manufacturer = "Brott", Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis. Donec ac ipsum sit amet leo blandit tincidunt non nec mi. Ut pulvinar consequat ex at efficitur. Vestibulum tempor dui a tempus varius. Phasellus at turpis imperdiet, tempor mauris id, hendrerit libero. Nunc eu eros maximus, commodo ante nec, rhoncus augue. Quisque vestibulum rutrum orci a venenatis. Fusce auctor at nunc sed condimentum. ", Price = 1300},
-                new Product { Id = 2, Name = "2000", Category = Category.Part, Manufacturer = "Nimbus", Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis. Donec ac ipsum sit amet leo blandit tincidunt non nec mi. Ut pulvinar consequat ex at efficitur. Vestibulum tempor dui a tempus varius. Phasellus at turpis imperdiet, tempor mauris id, hendrerit libero. Nunc eu eros maximus, commodo ante nec, rhoncus augue. Quisque vestibulum rutrum orci a venenatis. Fusce auctor at nunc sed condimentum. ", Price = 4000}
+                new Product { Id = 0, Name = "Scale 520", Category = Category.Bike, Manufacturer = "Scott", Description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis.", Price = 999 },
+                new Product { Id = 1, Name = "Mule 910", Category = Category.Accessory, Manufacturer = "Brott", Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis.", Price = 1300},
+                new Product { Id = 2, Name = "2000", Category = Category.Part, Manufacturer = "Nimbus", Description= "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce sit amet condimentum nisi. Praesent a egestas ex, non sodales turpis.", Price = 4000}
             };
         }
 
-        public void Add(Product product)
+        public Product Add(Product product)
         {
             product.Id = products.Max(p => p.Id) + 1;
             products.Add(product);
+            return product;
         }
 
         public Product Get(int id)
@@ -32,9 +33,9 @@ namespace ServiceStation.Core.Services
             return products.FirstOrDefault(r => r.Id == id);
         }
 
-        public void Update(Product product)
+        public Product Update(Product product)
         {
-            var existing = Get(product.Id);
+            var existing = products.SingleOrDefault(p=> p.Id == product.Id);
             if (existing != null)
             {
                 existing.Name = product.Name;
@@ -43,11 +44,27 @@ namespace ServiceStation.Core.Services
                 existing.Category = product.Category;
                 existing.Price = product.Price;
             }
+            return existing;
         }
 
         public IEnumerable<Product> GetAll()
         {
             return products.OrderBy(r => r.Name);
+        }
+
+        public Product Delete(int id)
+        {
+            var product = products.FirstOrDefault(r => r.Id == id);
+            if (product != null)
+            {
+                products.Remove(product);
+            }
+            return null;
+        }
+
+        public int Commit()
+        {
+            return 0;
         }
     }
 }
