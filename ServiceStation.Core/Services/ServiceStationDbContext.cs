@@ -9,5 +9,11 @@ namespace ServiceStation.Core.Services
     public class ServiceStationDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+
+        public ServiceStationDbContext(DbContextOptions<ServiceStationDbContext> options)
+            : base(options)
+        {
+
+        }
     }
 }
