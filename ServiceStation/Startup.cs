@@ -31,7 +31,7 @@ namespace ServiceStation
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
             });
-            services.AddSingleton<IProductRepository, MockProductRepository>();
+            services.AddScoped<IProductRepository, SqlProductData>();
             services.AddControllersWithViews();
         }
 

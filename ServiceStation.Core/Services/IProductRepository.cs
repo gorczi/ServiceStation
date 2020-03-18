@@ -14,6 +14,5 @@ namespace ServiceStation.Core.Services
         Product Add(Product product);
         Product Update(Product product);
         Product Delete(int id);
-        int Commit();
     }
 }
