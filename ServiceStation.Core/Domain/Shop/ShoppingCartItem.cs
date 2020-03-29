@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ServiceStation.Core.Domain.Shop
 {
-    class ShoppingCartItem
+    public class ShoppingCartItem
     {
         public int ShoppingCartItemId { get; set; }
         public Product Product { get; set; }
