@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceStation.Core.Domain;
 using ServiceStation.Core.Services;
@@ -69,10 +70,30 @@ namespace ServiceStation.Controllers
         {
             if (ModelState.IsValid)
             {
-                
+                productRepository.Update(product);
                 return RedirectToAction("Details", new { id = product.Id });
             }
             return View(product);
         }
+
+        [HttpGet]
+        public IActionResult Delete(int id)
+        {
+            var model = productRepository.Get(id);
+            if (model == null)
+            {
+                return View("NotFound");
+            }
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id, IFormCollection form)
+        {
+            productRepository.Delete(id);
+            return RedirectToAction("Index");
+        }
+
     }
 }

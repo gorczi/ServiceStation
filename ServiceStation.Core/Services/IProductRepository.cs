@@ -11,6 +11,8 @@ namespace ServiceStation.Core.Services
     {
         IEnumerable<Product> GetAll();
         Product Get(int id);
-        void Add(Product product);
+        Product Add(Product product);
+        Product Update(Product product);
+        Product Delete(int id);
     }
 }
