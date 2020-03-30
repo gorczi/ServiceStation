@@ -1,11 +1,8 @@
-﻿using ServiceStation.Core.Domain;
-using System;
+﻿using ServiceStation.Models;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ServiceStation.Core.Services
+namespace ServiceStation.Services
 {
     public class MockProductRepository : IProductRepository
     {

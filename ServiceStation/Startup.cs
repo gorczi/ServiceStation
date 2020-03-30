@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ServiceStation.Core.Services;
+using ServiceStation.Models;
+using ServiceStation.Services;
 
 namespace ServiceStation
 {
@@ -31,10 +27,12 @@ namespace ServiceStation
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
             });
+
             services.AddScoped<IProductRepository, SqlProductData>();
-            services.AddControllersWithViews();
+            services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
             services.AddSession();
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -49,6 +47,7 @@ namespace ServiceStation
                 // Add Error Page
             }
             app.UseStaticFiles();
+            app.UseSession();
             app.UseRouting();
 
             app.UseEndpoints(cfg =>

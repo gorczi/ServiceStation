@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace ServiceStation.Core.Migrations
+namespace ServiceStation.Migrations
 {
     public partial class AddShoppingCartItem : Migration
     {

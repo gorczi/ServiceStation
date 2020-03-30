@@ -1,9 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ServiceStation.Core.Domain;
-using System;
+using ServiceStation.Models;
 using System.Collections.Generic;
 
-namespace ServiceStation.Core.Services
+namespace ServiceStation.Services
 {
     public class SqlProductData : IProductRepository
     {

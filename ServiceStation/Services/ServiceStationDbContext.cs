@@ -1,11 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using ServiceStation.Core.Domain;
-using ServiceStation.Core.Domain.Shop;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using ServiceStation.Models;
 
-namespace ServiceStation.Core.Services
+namespace ServiceStation.Services
 {
     public class ServiceStationDbContext : DbContext
     {

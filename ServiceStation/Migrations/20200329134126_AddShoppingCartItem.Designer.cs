@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using ServiceStation.Core.Services;
+using ServiceStation.Services;
 
-namespace ServiceStation.Core.Migrations
+namespace ServiceStation.Migrations
 {
     [DbContext(typeof(ServiceStationDbContext))]
-    partial class ServiceStationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200329134126_AddShoppingCartItem")]
+    partial class AddShoppingCartItem
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -19,7 +21,7 @@ namespace ServiceStation.Core.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("ServiceStation.Core.Domain.Product", b =>
+            modelBuilder.Entity("ServiceStation.Models.Product", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -51,7 +53,7 @@ namespace ServiceStation.Core.Migrations
                     b.ToTable("Products");
                 });
 
-            modelBuilder.Entity("ServiceStation.Core.Domain.Shop.ShoppingCartItem", b =>
+            modelBuilder.Entity("ServiceStation.Models.ShoppingCartItem", b =>
                 {
                     b.Property<int>("ShoppingCartItemId")
                         .ValueGeneratedOnAdd()
@@ -74,9 +76,9 @@ namespace ServiceStation.Core.Migrations
                     b.ToTable("ShoppingCartItems");
                 });
 
-            modelBuilder.Entity("ServiceStation.Core.Domain.Shop.ShoppingCartItem", b =>
+            modelBuilder.Entity("ServiceStation.Models.ShoppingCartItem", b =>
                 {
-                    b.HasOne("ServiceStation.Core.Domain.Product", "Product")
+                    b.HasOne("ServiceStation.Models.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId");
                 });

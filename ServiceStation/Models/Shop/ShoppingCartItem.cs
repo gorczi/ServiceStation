@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ServiceStation.Core.Domain.Shop
+﻿namespace ServiceStation.Models
 {
     public class ShoppingCartItem
     {
