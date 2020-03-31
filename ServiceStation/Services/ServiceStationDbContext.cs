@@ -9,6 +9,10 @@ namespace ServiceStation.Services
 
         public DbSet<ShoppingCartItem> ShoppingCartItems { get; set; }
 
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
+
         public ServiceStationDbContext(DbContextOptions<ServiceStationDbContext> options)
             : base(options)
         {
