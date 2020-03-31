@@ -28,6 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="App" asp-action="About">About</a>
                 </li>
+                @await Component.InvokeAsync("ShoppingCartSummary")
             </ul>
         </div>
     </nav>

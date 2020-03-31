@@ -50,5 +50,8 @@
 </div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-productId="@Model.Id"><i class="fas fa-shopping-basket"></i>Add to Cart</a> |
+    <a asp-action="Index">Back to List</a> |
+    
+           
 </div>
