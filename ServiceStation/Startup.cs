@@ -29,6 +29,7 @@ namespace ServiceStation
             });
 
             services.AddScoped<IProductRepository, SqlProductData>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
             services.AddSession();
