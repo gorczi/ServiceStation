@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title - ServiceStation</title>
     <link href="~/lib/bootstrap/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/all.css" rel="stylesheet" />
     <link href="~/css/site.css" rel="stylesheet" />
 </head>
 <body>
@@ -27,6 +28,7 @@
                 <li class="nav-item">
                     <a class="nav-link" asp-controller="App" asp-action="About">About</a>
                 </li>
+                @await Component.InvokeAsync("ShoppingCartSummary")
             </ul>
         </div>
     </nav>
@@ -41,6 +43,7 @@
     </div>
     <script src="~/lib/jquery/jquery.js"></script>
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
+    <script src="~/lib/font-awesome/js/all.js"></script>
     <script src="~/js/index.js"></script>
 </body>
 </html>

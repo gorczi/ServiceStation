@@ -1,4 +1,4 @@
-﻿@model IEnumerable<ServiceStation.Core.Domain.Product>
+﻿@model IEnumerable<ServiceStation.Models.Product>
 
 @{
     ViewBag.Title = "Shop";
@@ -58,7 +58,9 @@
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
+                       asp-route-productId="@item.Id">Add to cart</a>
                 </td>
             </tr>
         }

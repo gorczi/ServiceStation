@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ServiceStation.Core.Domain;
-using ServiceStation.Core.Services;
+using ServiceStation.Models;
+using ServiceStation.Services;
 
 namespace ServiceStation.Controllers
 {
