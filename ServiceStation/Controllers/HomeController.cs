@@ -2,7 +2,7 @@
 
 namespace ServiceStation.Controllers
 {
-    public class AppController : Controller
+    public class HomeController : Controller
     {
         public IActionResult Index()
         {
