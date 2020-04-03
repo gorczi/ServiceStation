@@ -26,7 +26,7 @@ namespace ServiceStation
         {
             services.AddDbContextPool<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
             services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
