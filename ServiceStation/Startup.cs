@@ -24,12 +24,12 @@ namespace ServiceStation
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<ServiceStationDbContext>(options =>
+            services.AddDbContextPool<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
             });
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<ServiceStationDbContext>();
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IProductRepository, SqlProductData>();
             services.AddScoped<IOrderRepository, OrderRepository>();

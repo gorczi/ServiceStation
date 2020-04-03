@@ -8,7 +8,7 @@ using ServiceStation.Services;
 
 namespace ServiceStation.Migrations
 {
-    [DbContext(typeof(ServiceStationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20200317093850_initialcreate")]
     partial class initialcreate
     {

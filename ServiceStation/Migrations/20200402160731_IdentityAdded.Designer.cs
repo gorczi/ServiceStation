@@ -9,7 +9,7 @@ using ServiceStation.Services;
 
 namespace ServiceStation.Migrations
 {
-    [DbContext(typeof(ServiceStationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     [Migration("20200402160731_IdentityAdded")]
     partial class IdentityAdded
     {

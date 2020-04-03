@@ -6,9 +6,9 @@ namespace ServiceStation.Services
 {
     public class SqlProductData : IProductRepository
     {
-        private readonly ServiceStationDbContext db;
+        private readonly AppDbContext db;
 
-        public SqlProductData(ServiceStationDbContext db)
+        public SqlProductData(AppDbContext db)
         {
             this.db = db;
         }

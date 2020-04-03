@@ -8,7 +8,7 @@ using ServiceStation.Services;
 
 namespace ServiceStation.Migrations
 {
-    [DbContext(typeof(ServiceStationDbContext))]
+    [DbContext(typeof(AppDbContext))]
     partial class ServiceStationDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

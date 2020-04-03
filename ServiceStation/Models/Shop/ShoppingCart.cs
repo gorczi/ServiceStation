@@ -10,13 +10,13 @@ namespace ServiceStation.Models
 {
     public class ShoppingCart
     {
-        private readonly ServiceStationDbContext _ServiceStationDbContext;
+        private readonly AppDbContext _ServiceStationDbContext;
 
         public string ShoppingCartId { get; set; }
 
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
-        private ShoppingCart(ServiceStationDbContext ServiceStationDbContext)
+        private ShoppingCart(AppDbContext ServiceStationDbContext)
         {
             _ServiceStationDbContext = ServiceStationDbContext;
         }
@@ -26,7 +26,7 @@ namespace ServiceStation.Models
             ISession session = services.GetRequiredService<IHttpContextAccessor>()?
                 .HttpContext.Session;
 
-            var context = services.GetService<ServiceStationDbContext>();
+            var context = services.GetService<AppDbContext>();
 
             string cartId = session.GetString("CartId") ?? Guid.NewGuid().ToString();
 
