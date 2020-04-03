@@ -29,6 +29,7 @@
                     <a class="nav-link" asp-controller="App" asp-action="About">About</a>
                 </li>
                 @await Component.InvokeAsync("ShoppingCartSummary")
+                <partial name="_LoginPartial" />
             </ul>
         </div>
     </nav>
@@ -45,5 +46,6 @@
     <script src="~/lib/bootstrap/js/bootstrap.js"></script>
     <script src="~/lib/font-awesome/js/all.js"></script>
     <script src="~/js/index.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
