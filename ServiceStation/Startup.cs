@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,10 +24,12 @@ namespace ServiceStation
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContextPool<ServiceStationDbContext>(options =>
+            services.AddDbContextPool<AppDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
             });
+
+            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IProductRepository, SqlProductData>();
             services.AddScoped<IOrderRepository, OrderRepository>();
@@ -34,28 +37,32 @@ namespace ServiceStation
             services.AddHttpContextAccessor();
             services.AddSession();
             services.AddControllersWithViews();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsEnvironment("Development"))
+            if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                // Add Error Page
-            }
+
+            app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSession();
-            app.UseRouting();
 
-            app.UseEndpoints(cfg =>
+            app.UseRouting();
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseEndpoints(endpoints =>
             {
-                cfg.MapControllerRoute("Default",
-                    "{controller}/{action}/{id?}",
-                    new { controller = "App", Action = "Index" });
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapRazorPages();
             });
         }
     }

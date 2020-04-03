@@ -1,9 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using ServiceStation.Models;
 
 namespace ServiceStation.Services
 {
-    public class ServiceStationDbContext : DbContext
+    public class AppDbContext : IdentityDbContext<IdentityUser>
     {
         public DbSet<Product> Products { get; set; }
 
@@ -13,7 +15,7 @@ namespace ServiceStation.Services
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
 
-        public ServiceStationDbContext(DbContextOptions<ServiceStationDbContext> options)
+        public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
         {
 
