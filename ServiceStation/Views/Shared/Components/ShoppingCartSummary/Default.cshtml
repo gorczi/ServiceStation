@@ -3,7 +3,7 @@
 @if (Model.ShoppingCart.ShoppingCartItems.Count>0)
 {
     <li>
-        <a type="button" class="btn btn-outline-primary btn-sm" asp-controller="ShoppingCart">
+        <a type="button" class="btn btn-outline-primary btn-sm" asp-controller="ShoppingCart" asp-action="Index">
             <span class="fa fa-shopping-basket"></span>
             <span id="cart-status">
                 @Model.ShoppingCart.ShoppingCartItems.Count
