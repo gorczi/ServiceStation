@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServiceStation.Auth;
 using ServiceStation.Models;
 using ServiceStation.Services;
 
@@ -26,10 +27,17 @@ namespace ServiceStation
         {
             services.AddDbContextPool<AppDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("ServiceStationDb"));
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
+                {
+                    options.Password.RequiredLength = 6;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequireUppercase = true;
+                    options.User.RequireUniqueEmail = true;
+                })
+                .AddEntityFrameworkStores<AppDbContext>();
 
             services.AddScoped<IProductRepository, SqlProductData>();
             services.AddScoped<IOrderRepository, OrderRepository>();
