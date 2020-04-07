@@ -203,5 +203,22 @@ namespace ServiceStation.Controllers
 
             return RedirectToAction("RoleManagement", _roleManager.Roles);
         }
+
+        public async Task<IActionResult> DeleteRole(string id)
+        {
+            IdentityRole role = await _roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                var result = await _roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                    return RedirectToAction("RoleManagement", _roleManager.Roles);
+                ModelState.AddModelError("", "Something went wrong while deleting this role.");
+            }
+            else
+            {
+                ModelState.AddModelError("", "This role can't be found.");
+            }
+            return View("RoleManagement", _roleManager.Roles);
+        }
     }
 }
