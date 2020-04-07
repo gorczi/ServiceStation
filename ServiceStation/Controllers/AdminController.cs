@@ -129,5 +129,32 @@ namespace ServiceStation.Controllers
             var roles = _roleManager.Roles;
             return View(roles);
         }
+
+        public IActionResult AddNewRole() => View();
+
+        [HttpPost]
+        public async Task<IActionResult> AddNewRole(AddRoleViewModel addRoleViewModel)
+        {
+
+            if (!ModelState.IsValid) return View(addRoleViewModel);
+
+            var role = new IdentityRole
+            {
+                Name = addRoleViewModel.RoleName
+            };
+
+            IdentityResult result = await _roleManager.CreateAsync(role);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("RoleManagement", _roleManager.Roles);
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+            return View(addRoleViewModel);
+        }
     }
 }
