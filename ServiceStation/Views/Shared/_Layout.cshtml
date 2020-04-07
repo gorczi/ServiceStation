@@ -42,7 +42,7 @@
                         <a class="nav-link" asp-controller="Home" asp-action="About">About</a>
                     </li>
                     @await Component.InvokeAsync("ShoppingCartSummary")
-                    @if (SignInManager.IsSignedIn(User))// && User.IsInRole("Administrator"))
+                    @if (SignInManager.IsSignedIn(User) && User.IsInRole("Administrator"))
                     {
                         @await Component.InvokeAsync("AdminMenu")
                     }
