@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ServiceStation.Controllers
 {
-    [Authorize]
+    [Authorize(Roles="Administrator")]
     public class AdminController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -219,6 +219,48 @@ namespace ServiceStation.Controllers
                 ModelState.AddModelError("", "This role can't be found.");
             }
             return View("RoleManagement", _roleManager.Roles);
+        }
+
+        //Users in roles
+        public async Task<IActionResult> AddUserToRole(string roleId)
+        {
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            if (role == null)
+                return RedirectToAction("RoleManagement", _roleManager.Roles);
+
+            var addUserToRoleViewModel = new UserRoleViewModel { RoleId = role.Id };
+
+            foreach (var user in _userManager.Users)
+            {
+                if (!await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    addUserToRoleViewModel.Users.Add(user);
+                }
+            }
+
+            return View(addUserToRoleViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> AddUserToRole(UserRoleViewModel userRoleViewModel)
+        {
+            var user = await _userManager.FindByIdAsync(userRoleViewModel.UserId);
+            var role = await _roleManager.FindByIdAsync(userRoleViewModel.RoleId);
+
+            var result = await _userManager.AddToRoleAsync(user, role.Name);
+
+            if (result.Succeeded)
+            {
+                return RedirectToAction("RoleManagement", _roleManager.Roles);
+            }
+
+            foreach (IdentityError error in result.Errors)
+            {
+                ModelState.AddModelError("", error.Description);
+            }
+
+            return View(userRoleViewModel);
         }
     }
 }
