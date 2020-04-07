@@ -10,11 +10,13 @@ namespace ServiceStation.Controllers
     [Authorize]
     public class AdminController : Controller
     {
-        private UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
-        public AdminController(UserManager<ApplicationUser> userManager)
+        public AdminController(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: /<controller>/
@@ -119,6 +121,13 @@ namespace ServiceStation.Controllers
                 ModelState.AddModelError("", "This user can't be found");
             }
             return View("UserManagement", _userManager.Users);
+        }
+
+        //Role management
+        public IActionResult RoleManagement()
+        {
+            var roles = _roleManager.Roles;
+            return View(roles);
         }
     }
 }
