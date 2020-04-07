@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ServiceStation.Auth;
 using ServiceStation.Models;
 using ServiceStation.Services;
 
@@ -29,7 +30,7 @@ namespace ServiceStation
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
                 {
                     options.Password.RequiredLength = 6;
                     options.Password.RequireNonAlphanumeric = true;

@@ -1,13 +1,14 @@
-﻿@using System.Security.Claims
+﻿@using ServiceStation.Auth
+@using System.Security.Claims
 @using System.Threading.Tasks
 @using Microsoft.AspNetCore.Authorization
 @using Microsoft.AspNetCore.Http
 @using Microsoft.AspNetCore.Identity
 @using Microsoft.AspNetCore.Identity.EntityFrameworkCore
 
-@inject SignInManager<IdentityUser> SignInManager
+@inject SignInManager<ApplicationUser> SignInManager
 @inject IAuthorizationService AuthorizationService
-@inject UserManager<IdentityUser> UserManager
+@inject UserManager<ApplicationUser> UserManager
 
 <!DOCTYPE html>
 
@@ -44,7 +45,7 @@
                 {
                     @await Component.InvokeAsync("AdminMenu")
                 }
-                <partial name="_LoginPartial" />
+                @await Html.PartialAsync("_LoginPartial")
             </ul>
         </div>
     </nav>

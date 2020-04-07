@@ -21,5 +21,9 @@ namespace ServiceStation.ViewModels
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public string City { get; set; }
+
+        public string Country { get; set; }
     }
 }
