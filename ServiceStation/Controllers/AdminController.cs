@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using ServiceStation.Auth;
 using ServiceStation.ViewModels;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ServiceStation.Controllers
@@ -155,6 +156,52 @@ namespace ServiceStation.Controllers
                 ModelState.AddModelError("", error.Description);
             }
             return View(addRoleViewModel);
+        }
+
+        public async Task<IActionResult> EditRole(string id)
+        {
+            var role = await _roleManager.FindByIdAsync(id);
+
+            if (role == null)
+                return RedirectToAction("RoleManagement", _roleManager.Roles);
+
+            var editRoleViewModel = new EditRoleViewModel
+            {
+                Id = role.Id,
+                RoleName = role.Name,
+                Users = new List<string>()
+            };
+
+
+            foreach (var user in _userManager.Users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                    editRoleViewModel.Users.Add(user.UserName);
+            }
+
+            return View(editRoleViewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditRole(EditRoleViewModel editRoleViewModel)
+        {
+            var role = await _roleManager.FindByIdAsync(editRoleViewModel.Id);
+
+            if (role != null)
+            {
+                role.Name = editRoleViewModel.RoleName;
+
+                var result = await _roleManager.UpdateAsync(role);
+
+                if (result.Succeeded)
+                    return RedirectToAction("RoleManagement", _roleManager.Roles);
+
+                ModelState.AddModelError("", "Role not updated, something went wrong.");
+
+                return View(editRoleViewModel);
+            }
+
+            return RedirectToAction("RoleManagement", _roleManager.Roles);
         }
     }
 }
