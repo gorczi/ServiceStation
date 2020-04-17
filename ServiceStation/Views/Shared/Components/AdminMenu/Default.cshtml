@@ -1,15 +1,13 @@
 ﻿@model IEnumerable<ServiceStation.Components.AdminMenuItem>
 
-<li class="dropdown">
-    <a asp-controller="Admin"
-       asp-action="Index"
-       class="dropdown-toggle" data-toggle="dropdown">Admin<b class="caret"></b></a>
-    <ul class="dropdown-menu">
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        AdminMenu
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
         @foreach (var menuItem in Model)
         {
-            <li>
-                <a asp-controller="Admin" asp-action=@menuItem.ActionValue>@menuItem.DisplayValue</a>
-            </li>
+            <a class="dropdown-item" asp-controller="Admin" asp-action=@menuItem.ActionValue>@menuItem.DisplayValue</a>
         }
-    </ul>
+    </div>
 </li>
