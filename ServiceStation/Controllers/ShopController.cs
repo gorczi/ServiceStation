@@ -7,23 +7,23 @@ namespace ServiceStation.Controllers
 {
     public class ShopController : Controller
     {
-        private readonly IProductRepository productRepository;
+        private readonly IProductRepository _productRepository;
 
         public ShopController(IProductRepository productRepository)
         {
-            this.productRepository = productRepository;
+            this._productRepository = productRepository;
         }
 
         [HttpGet]
         public IActionResult Index()
         {
-            return View(productRepository.GetAll());
+            return View(_productRepository.GetAll());
         }
 
         [HttpGet]
         public IActionResult Details(int id)
         {
-            var model = productRepository.Get(id);
+            var model = _productRepository.Get(id);
             if (model == null)
             {
                 return View("NotFound");
