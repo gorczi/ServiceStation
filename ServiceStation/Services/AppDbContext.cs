@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using ServiceStation.Auth;
 using ServiceStation.Models;
+using ServiceStation.Models.Shop;
 
 namespace ServiceStation.Services
 {
@@ -15,6 +16,8 @@ namespace ServiceStation.Services
         public DbSet<Order> Orders { get; set; }
 
         public DbSet<OrderDetail> OrderDetails { get; set; }
+
+        public DbSet<AddressData> Addresses { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options)
             : base(options)
