@@ -7,17 +7,20 @@ using System.Threading.Tasks;
 
 namespace ServiceStation.ViewModels
 {
-    public class EditUserViewModel
+    public class OrderViewModel
     {
-        public string Id { get; set; }
-
         [Required(ErrorMessage = "Please enter the user name")]
         [Display(Name = "User name")]
         public string UserName { get; set; }
 
+        [Phone]
+        [Display(Name = "Phone number")]
+        public string PhoneNumber { get; set; }
+
         [Required(ErrorMessage = "Please enter the user email")]
         public string Email { get; set; }
 
+        [Required]
         public AddressData Address { get; set; }
     }
 }

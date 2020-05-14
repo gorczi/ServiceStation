@@ -61,10 +61,6 @@ namespace ServiceStation.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
-
-            public string City { get; set; }
-
-            public string Country { get; set; }
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -82,8 +78,6 @@ namespace ServiceStation.Areas.Identity.Pages.Account
                 var user = new ApplicationUser { 
                     UserName = Input.Email, 
                     Email = Input.Email, 
-                    City = Input.City,
-                    Country = Input.Country
                 };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ServiceStation.Models.Shop;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -22,8 +23,7 @@ namespace ServiceStation.ViewModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string City { get; set; }
+        public AddressData Address { get; set; }
 
-        public string Country { get; set; }
     }
 }

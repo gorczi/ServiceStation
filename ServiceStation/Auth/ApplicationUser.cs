@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using ServiceStation.Models.Shop;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ namespace ServiceStation.Auth
 {
     public class ApplicationUser : IdentityUser
     {
-        public string City { get; set; }
-        public string Country { get; set; }
+        public AddressData Address { get; set; }
     }
 }
