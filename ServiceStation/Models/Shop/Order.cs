@@ -13,9 +13,9 @@ namespace ServiceStation.Models
         [BindNever]
         public int OrderId { get; set; }
 
-        public List<OrderDetail> OrderDetails { get; set; }
+        public virtual List<OrderDetail> OrderDetails { get; set; }
 
-        public AddressData Address { get; set; }
+        public virtual AddressData Address { get; set; }
 
         [BindNever]
         [ScaffoldColumn(false)]

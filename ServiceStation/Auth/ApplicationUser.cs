@@ -9,6 +9,6 @@ namespace ServiceStation.Auth
 {
     public class ApplicationUser : IdentityUser
     {
-        public AddressData Address { get; set; }
+        public virtual AddressData Address { get; set; }
     }
 }
