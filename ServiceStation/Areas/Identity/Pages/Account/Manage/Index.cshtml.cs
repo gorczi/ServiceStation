@@ -97,7 +97,11 @@ namespace ServiceStation.Areas.Identity.Pages.Account.Manage
 
             if (Input.Address != user.Address)
             {
-                user.Address = Input.Address;
+                user.Address.FirstName = Input.Address.FirstName;
+                user.Address.LastName = Input.Address.LastName;
+                user.Address.AddressLine1 = Input.Address.AddressLine1;
+                user.Address.City = Input.Address.City;
+                user.Address.ZipCode = Input.Address.ZipCode;
             }
 
             await _userManager.UpdateAsync(user);
