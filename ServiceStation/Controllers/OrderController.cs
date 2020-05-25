@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ServiceStation.Auth;
-using ServiceStation.Models;
-using ServiceStation.Services;
+using ServiceStation.Core.Auth;
+using ServiceStation.Core.Shop;
+using ServiceStation.Data.Services;
 using ServiceStation.ViewModels;
 
 namespace ServiceStation.Controllers

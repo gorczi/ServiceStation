@@ -6,9 +6,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using ServiceStation.Auth;
-using ServiceStation.Models;
-using ServiceStation.Services;
+using ServiceStation.Core.Auth;
+using ServiceStation.Data.Services;
 
 namespace ServiceStation
 {

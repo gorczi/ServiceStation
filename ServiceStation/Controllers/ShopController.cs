@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using ServiceStation.Models;
-using ServiceStation.Services;
+using ServiceStation.Data.Services;
 
 namespace ServiceStation.Controllers
 {
