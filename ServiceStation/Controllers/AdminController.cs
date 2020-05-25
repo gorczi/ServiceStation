@@ -48,8 +48,7 @@ namespace ServiceStation.Controllers
             {
                 UserName = addUserViewModel.UserName,
                 Email = addUserViewModel.Email,
-                City = addUserViewModel.City,
-                Country = addUserViewModel.Country
+                Address =addUserViewModel.Address
             };
 
             IdentityResult result = await _userManager.CreateAsync(user, addUserViewModel.Password);
@@ -73,7 +72,7 @@ namespace ServiceStation.Controllers
             if (user == null)
                 return RedirectToAction("UserManagement", _userManager.Users);
 
-            var vm = new EditUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName, City = user.City, Country = user.Country };
+            var vm = new EditUserViewModel() { Id = user.Id, Email = user.Email, UserName = user.UserName, Address = user.Address };
 
             return View(vm);
         }
@@ -88,8 +87,7 @@ namespace ServiceStation.Controllers
             {
                 user.Email = editUserViewModel.Email;
                 user.UserName = editUserViewModel.UserName;
-                user.City = editUserViewModel.City;
-                user.Country = editUserViewModel.Country;
+                user.Address = editUserViewModel.Address;
 
                 var result = await _userManager.UpdateAsync(user);
 

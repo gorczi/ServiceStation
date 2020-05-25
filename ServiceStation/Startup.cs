@@ -28,6 +28,7 @@ namespace ServiceStation
         {
             services.AddDbContextPool<AppDbContext>(options =>
             {
+                options.UseLazyLoadingProxies();
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
             });
 

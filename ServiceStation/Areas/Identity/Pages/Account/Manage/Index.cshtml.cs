@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using ServiceStation.Auth;
+using ServiceStation.Models.Shop;
 
 namespace ServiceStation.Areas.Identity.Pages.Account.Manage
 {
@@ -37,23 +38,23 @@ namespace ServiceStation.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
 
-            public string City { get; set; }
+            public AddressData Address { get; set; }
 
-            public string Country { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            var address = user.Address;
 
             Username = userName;
 
+
             Input = new InputModel
             {
-                City = user.City,
-                Country = user.Country,
-                PhoneNumber = phoneNumber
+                PhoneNumber = phoneNumber,
+                Address = address
             };
         }
 
@@ -94,14 +95,13 @@ namespace ServiceStation.Areas.Identity.Pages.Account.Manage
                 }
             }
 
-            if (Input.City != user.City)
+            if (Input.Address != user.Address)
             {
-                user.City = Input.City;
-            }
-
-            if (Input.Country != user.Country)
-            {
-                user.Country = Input.Country;
+                user.Address.FirstName = Input.Address.FirstName;
+                user.Address.LastName = Input.Address.LastName;
+                user.Address.AddressLine1 = Input.Address.AddressLine1;
+                user.Address.City = Input.Address.City;
+                user.Address.ZipCode = Input.Address.ZipCode;
             }
 
             await _userManager.UpdateAsync(user);

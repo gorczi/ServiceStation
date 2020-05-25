@@ -14,7 +14,7 @@ namespace ServiceStation.Models
 
         public string ShoppingCartId { get; set; }
 
-        public List<ShoppingCartItem> ShoppingCartItems { get; set; }
+        public virtual List<ShoppingCartItem> ShoppingCartItems { get; set; }
 
         private ShoppingCart(AppDbContext ServiceStationDbContext)
         {
@@ -85,7 +85,7 @@ namespace ServiceStation.Models
             return localAmount;
         }
 
-        public List<ShoppingCartItem> GetShoppingCartItems()
+        public virtual List<ShoppingCartItem> GetShoppingCartItems()
         {
             return ShoppingCartItems ??
                    (ShoppingCartItems =

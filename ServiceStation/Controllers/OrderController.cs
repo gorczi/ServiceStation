@@ -3,28 +3,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ServiceStation.Auth;
 using ServiceStation.Models;
 using ServiceStation.Services;
+using ServiceStation.ViewModels;
 
 namespace ServiceStation.Controllers
 {
     [Authorize]
     public class OrderController : Controller
     {
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IOrderRepository _orderRepository;
         private readonly ShoppingCart _shoppingCart;
 
-        public OrderController(IOrderRepository orderRepository, ShoppingCart shoppingCart)
+        public OrderController(IOrderRepository orderRepository, ShoppingCart shoppingCart, UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _orderRepository = orderRepository;
             _shoppingCart = shoppingCart;
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         // GET: /<controller>/
-        public IActionResult Checkout()
+        public async Task<IActionResult> Checkout()
         {
-            return View();
+            System.Security.Claims.ClaimsPrincipal currentUser = this.User;
+
+
+            var user = await _userManager.GetUserAsync(User);
+
+            //if (user == null)
+            //    return RedirectToAction("UserManagement", _userManager.Users);
+
+            var vm = new OrderViewModel() { Email = user.Email, UserName = user.UserName, Address = user.Address };
+
+            return View(vm);
         }
 
         [HttpPost]
