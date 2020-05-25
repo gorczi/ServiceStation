@@ -1,9 +1,5 @@
-﻿using ServiceStation.Models.Shop;
-using System;
-using System.Collections.Generic;
+﻿using ServiceStation.Core.Shop;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ServiceStation.ViewModels
 {

@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using ServiceStation.Auth;
-using ServiceStation.Models.Shop;
+using ServiceStation.Core.Auth;
+using ServiceStation.Core.Shop;
 
 namespace ServiceStation.Areas.Identity.Pages.Account.Manage
 {

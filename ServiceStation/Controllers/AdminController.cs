@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using ServiceStation.Auth;
+using ServiceStation.Core.Auth;
 using ServiceStation.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
