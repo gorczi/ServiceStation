@@ -28,7 +28,7 @@ namespace ServiceStation
             services.AddDbContextPool<AppDbContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
+                options.UseSqlServer(Configuration["AzureDBConnection"]);
             });
 
             services.AddIdentity<ApplicationUser, IdentityRole>(options =>
