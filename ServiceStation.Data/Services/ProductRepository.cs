@@ -4,11 +4,11 @@ using ServiceStation.Core.Shop;
 
 namespace ServiceStation.Data.Services
 {
-    public class SqlProductData : IProductRepository
+    public class ProductRepository : IProductRepository
     {
         private readonly AppDbContext db;
 
-        public SqlProductData(AppDbContext db)
+        public ProductRepository(AppDbContext db)
         {
             this.db = db;
         }

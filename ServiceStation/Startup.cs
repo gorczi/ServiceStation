@@ -57,7 +57,7 @@ namespace ServiceStation
                 .AddDefaultTokenProviders();
 
             services.AddScoped<IEmailSender, MockEmailSender>();
-            services.AddScoped<IProductRepository, SqlProductData>();
+            services.AddScoped<IProductRepository, ProductRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddScoped<ShoppingCart>(sp => ShoppingCart.GetCart(sp));
             services.AddHttpContextAccessor();
