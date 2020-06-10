@@ -1,6 +1,7 @@
 ﻿using ServiceStation.Core.Shop;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceStation.Data.Services
 {
@@ -40,6 +41,11 @@ namespace ServiceStation.Data.Services
             _appDbContext.Orders.Add(order);
 
             _appDbContext.SaveChanges();
+        }
+
+        public IEnumerable<Order> GetOrders(string userId)
+        {
+            return _appDbContext.Orders.Where(o => o.User.Id == userId);
         }
     }
 }

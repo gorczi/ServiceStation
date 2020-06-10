@@ -34,8 +34,8 @@ namespace ServiceStation.Controllers
 
             var user = await _userManager.GetUserAsync(User);
 
-            //if (user == null)
-            //    return RedirectToAction("UserManagement", _userManager.Users);
+            if (user == null)
+                return RedirectToAction("UserManagement", _userManager.Users);
 
             var vm = new OrderViewModel() { Email = user.Email, UserName = user.UserName, Address = user.Address };
 
@@ -44,7 +44,7 @@ namespace ServiceStation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Checkout(Order order)
+        public async Task<IActionResult> Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -56,6 +56,7 @@ namespace ServiceStation.Controllers
 
             if (ModelState.IsValid)
             {
+                order.User = await _userManager.GetUserAsync(HttpContext.User);
                 _orderRepository.CreateOrder(order);
                 _shoppingCart.ClearCart();
                 return RedirectToAction("CheckoutComplete");
@@ -67,6 +68,16 @@ namespace ServiceStation.Controllers
         {
             ViewBag.CheckoutCompleteMessage = "Thanks for your order!";
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyOrders()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var orders = _orderRepository.GetOrders(user.Id);
+
+            return View(orders);
         }
     }
 }
