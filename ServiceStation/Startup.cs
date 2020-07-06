@@ -42,7 +42,7 @@ namespace ServiceStation
             services.AddDbContextPool<AppDbContext>(options =>
             {
                 options.UseLazyLoadingProxies();
-                options.UseSqlServer(Configuration["AzureDBConnection"]);
+                options.UseSqlServer(Configuration["DbConnection"]);
                 options.UseLoggerFactory(MyLoggerFactory);
             });
 
