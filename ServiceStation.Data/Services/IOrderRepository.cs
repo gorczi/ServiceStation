@@ -6,8 +6,11 @@ namespace ServiceStation.Data.Services
     public interface IOrderRepository
     {
         void CreateOrder(Order order);
-
-        public IEnumerable<Order> GetOrders(string userId);
+        IEnumerable<OrderDetail> GetOrderDetails(int orderId);
+        Order GetOrder(int orderId);
+        //TODO refactor GetOrders =>GetOrdersByUser
+        IEnumerable<Order> GetOrders(string userId);
+        
     }
 }
  
