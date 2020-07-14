@@ -1,0 +1,46 @@
+﻿@model OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h1>Count: @Model.OrderDetails.Count()</h1>
+
+<table class="table">
+    @{var dummy = Model.OrderDetails.FirstOrDefault();}
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Product)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Order)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetails)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Amount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Product.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Order.OrderId)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
