@@ -97,7 +97,7 @@ namespace ServiceStation.Controllers
                 OrderTotal = order.OrderTotal
             };
 
-            return View(orderDetails);
+            return View(model);
         }
     }
 }
