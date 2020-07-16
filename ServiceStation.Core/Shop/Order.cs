@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding;
+using ServiceStation.Core.Auth;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace ServiceStation.Core.Shop
 {
@@ -13,6 +15,8 @@ namespace ServiceStation.Core.Shop
         public virtual List<OrderDetail> OrderDetails { get; set; }
 
         public virtual AddressData Address { get; set; }
+
+        public virtual ApplicationUser User { get; set; }
 
         [BindNever]
         [ScaffoldColumn(false)]

@@ -47,9 +47,9 @@
                     @Html.DisplayFor(modelItem => item.Price)
                 </td>
                 <td>
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart"
-                       asp-route-productId="@item.Id">Add to cart</a>
+                    <a class="btn btn-primary" asp-controller="Shop" asp-action="Details"
+                       asp-route-id="@item.Id">Details</a>
+                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToShoppingCart" asp-route-productId="@item.Id"><i class="fas fa-shopping-basket"></i></a>
                 </td>
             </tr>
         }

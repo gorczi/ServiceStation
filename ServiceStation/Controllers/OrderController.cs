@@ -34,8 +34,8 @@ namespace ServiceStation.Controllers
 
             var user = await _userManager.GetUserAsync(User);
 
-            //if (user == null)
-            //    return RedirectToAction("UserManagement", _userManager.Users);
+            if (user == null)
+                return RedirectToAction("UserManagement", _userManager.Users);
 
             var vm = new OrderViewModel() { Email = user.Email, UserName = user.UserName, Address = user.Address };
 
@@ -44,7 +44,7 @@ namespace ServiceStation.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Checkout(Order order)
+        public async Task<IActionResult> Checkout(Order order)
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.ShoppingCartItems = items;
@@ -56,17 +56,57 @@ namespace ServiceStation.Controllers
 
             if (ModelState.IsValid)
             {
+                order.User = await _userManager.GetUserAsync(HttpContext.User);
                 _orderRepository.CreateOrder(order);
                 _shoppingCart.ClearCart();
                 return RedirectToAction("CheckoutComplete");
             }
-            return View(order);
+
+            return await Checkout();
         }
 
         public IActionResult CheckoutComplete()
         {
             ViewBag.CheckoutCompleteMessage = "Thanks for your order!";
             return View();
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> MyOrders()
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+
+            var orders = _orderRepository.GetOrders(user.Id);
+
+            return View(orders);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(int id)
+        {
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            var order = _orderRepository.GetOrder(id);
+
+            var isOwner = user.Id == order.User.Id;
+
+            if (!isOwner)
+            {
+                return View("AccessDenied");
+            }
+
+            var orderDetails = _orderRepository.GetOrderDetails(id);
+
+            var model = new OrderDetailsViewModel
+            {
+                UserName = user.UserName,
+                Address = order.Address,
+                Email = user.Email,
+                OrderDetails = orderDetails,
+                OrderPlaced = order.OrderPlaced,
+                OrderTotal = order.OrderTotal
+            };
+
+            return View(model);
         }
     }
 }

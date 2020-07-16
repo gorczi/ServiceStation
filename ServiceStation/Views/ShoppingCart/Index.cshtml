@@ -8,34 +8,51 @@
 <h4>Best products with best prices.</h4>
 @if (Model.ShoppingCart.ShoppingCartItems.Count > 0)
 {
+    var sci = Model.ShoppingCart.ShoppingCartItems.FirstOrDefault();
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>Selected amount</th>
-                <th>Product</th>
-                <th class="text-right">Price</th>
+                <th>
+                    @Html.DisplayNameFor(model => sci.Amount)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => sci.Product.Manufacturer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => sci.Product.Name)
+                </th>
+                <th class="text-right">
+                    @Html.DisplayNameFor(model => sci.Product.Price)
+                </th>
                 <th class="text-right">Subtotal</th>
             </tr>
         </thead>
 
-
-
         <tbody>
-            @foreach (var line in Model.ShoppingCart.ShoppingCartItems)
+            @foreach (var item in Model.ShoppingCart.ShoppingCartItems)
             {
                 <tr>
-                    <td class="text-center">@line.Amount</td>
-                    <td class="text-left">@line.Product.Name</td>
-                    <td class="text-right">@line.Product.Price.ToString("c")</td>
+                    <td class="text-center">
+                        @Html.DisplayFor(modelItem => item.Amount)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Product.Manufacturer)
+                    </td>
+                    <td class="text-left">
+                        @Html.DisplayFor(modelItem => item.Product.Name)
+                    </td>
                     <td class="text-right">
-                        @((line.Amount * line.Product.Price).ToString("c"))
+                        @item.Product.Price.ToString("c")
+                    </td>
+                    <td class="text-right">
+                        @((item.Amount * item.Product.Price).ToString("c"))
                     </td>
                 </tr>
             }
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="3" class="text-right">Total:</td>
+                <td colspan="4" class="text-right">Total:</td>
                 <td class="text-right">
                     @Model.ShoppingCartTotal.ToString("c")
                 </td>
@@ -51,6 +68,6 @@ else
     <h4>Your shopping cart is empty. Add some products.</h4>
 }
 <div class="text-center">
-    <a class="btn btn-primary" asp-controller="Shop" >Go To Shop</a>
+    <a class="btn btn-primary" asp-controller="Shop">Go To Shop</a>
 </div>
 

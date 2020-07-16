@@ -1,0 +1,71 @@
+﻿@model OrderDetailsViewModel
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h4>Order Number: @Html.DisplayFor(model => Model.OrderDetails.First().OrderId)</h4>
+<h5>Order placed: @Model.OrderPlaced</h5>
+<div>
+    <h5>Address:</h5>
+    <p>
+        @Model.Address.FirstName @Model.Address.LastName
+        <br />
+        @Model.Address.AddressLine1
+        <br />
+        @Model.Address.ZipCode @Model.Address.City
+        <br />
+    </p>
+</div>
+<table class="table">
+    @{var dummy = Model.OrderDetails.FirstOrDefault();}
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Product.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Product.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Amount)
+            </th>
+            <th class="text-right">Subtotal</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.OrderDetails)
+        {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @item.Product.Price.ToString("c")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td class="text-right">
+                @((item.Amount * item.Product.Price).ToString("c"))
+            </td>
+        </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.OrderTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+<a class="btn btn-primary" asp-controller="Order" asp-action="MyOrders">Back to list</a>

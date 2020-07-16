@@ -10,7 +10,7 @@ namespace ServiceStation.Data.Services
 {
     public class ShoppingCart
     {
-        private readonly AppDbContext _ServiceStationDbContext;
+        private readonly AppDbContext _appDbContext;
 
         public string ShoppingCartId { get; set; }
 
@@ -18,7 +18,7 @@ namespace ServiceStation.Data.Services
 
         private ShoppingCart(AppDbContext ServiceStationDbContext)
         {
-            _ServiceStationDbContext = ServiceStationDbContext;
+            _appDbContext = ServiceStationDbContext;
         }
 
         public static ShoppingCart GetCart(IServiceProvider services)
@@ -38,7 +38,7 @@ namespace ServiceStation.Data.Services
         public void AddToCart(Product product, int amount)
         {
             var shoppingCartItem =
-                    _ServiceStationDbContext.ShoppingCartItems.SingleOrDefault(
+                    _appDbContext.ShoppingCartItems.SingleOrDefault(
                         s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
 
             if (shoppingCartItem == null)
@@ -50,19 +50,19 @@ namespace ServiceStation.Data.Services
                     Amount = 1
                 };
 
-                _ServiceStationDbContext.ShoppingCartItems.Add(shoppingCartItem);
+                _appDbContext.ShoppingCartItems.Add(shoppingCartItem);
             }
             else
             {
                 shoppingCartItem.Amount++;
             }
-            _ServiceStationDbContext.SaveChanges();
+            _appDbContext.SaveChanges();
         }
 
         public int RemoveFromCart(Product product)
         {
             var shoppingCartItem =
-                    _ServiceStationDbContext.ShoppingCartItems.SingleOrDefault(
+                    _appDbContext.ShoppingCartItems.SingleOrDefault(
                         s => s.Product.Id == product.Id && s.ShoppingCartId == ShoppingCartId);
 
             var localAmount = 0;
@@ -76,11 +76,11 @@ namespace ServiceStation.Data.Services
                 }
                 else
                 {
-                    _ServiceStationDbContext.ShoppingCartItems.Remove(shoppingCartItem);
+                    _appDbContext.ShoppingCartItems.Remove(shoppingCartItem);
                 }
             }
 
-            _ServiceStationDbContext.SaveChanges();
+            _appDbContext.SaveChanges();
 
             return localAmount;
         }
@@ -89,25 +89,25 @@ namespace ServiceStation.Data.Services
         {
             return ShoppingCartItems ??
                    (ShoppingCartItems =
-                       _ServiceStationDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+                       _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                            .Include(s => s.Product)
                            .ToList());
         }
 
         public void ClearCart()
         {
-            var cartItems = _ServiceStationDbContext
+            var cartItems = _appDbContext
                 .ShoppingCartItems
                 .Where(cart => cart.ShoppingCartId == ShoppingCartId);
 
-            _ServiceStationDbContext.ShoppingCartItems.RemoveRange(cartItems);
+            _appDbContext.ShoppingCartItems.RemoveRange(cartItems);
 
-            _ServiceStationDbContext.SaveChanges();
+            _appDbContext.SaveChanges();
         }
 
         public decimal GetShoppingCartTotal()
         {
-            var total = _ServiceStationDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
+            var total = _appDbContext.ShoppingCartItems.Where(c => c.ShoppingCartId == ShoppingCartId)
                 .Select(c => c.Product.Price * c.Amount).Sum();
             return total;
         }

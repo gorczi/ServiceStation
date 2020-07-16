@@ -1,6 +1,7 @@
 ﻿using ServiceStation.Core.Shop;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ServiceStation.Data.Services
 {
@@ -40,6 +41,28 @@ namespace ServiceStation.Data.Services
             _appDbContext.Orders.Add(order);
 
             _appDbContext.SaveChanges();
+        }
+
+        public IEnumerable<Order> GetOrders(string userId)
+        {
+            var orders = _appDbContext.Orders
+                .Where(o => o.User.Id == userId);
+            return orders;
+        }
+
+        public Order GetOrder(int orderId)
+        {
+            var order = _appDbContext.Orders
+                .Where(o => o.OrderId == orderId)
+                .FirstOrDefault();
+            return order;
+        }
+
+        public IEnumerable<OrderDetail> GetOrderDetails(int orderId)
+        {
+            var orderDetails = _appDbContext.OrderDetails
+                .Where(od => od.OrderId == orderId);
+            return orderDetails;
         }
     }
 }

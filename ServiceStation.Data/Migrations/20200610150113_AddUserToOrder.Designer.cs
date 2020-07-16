@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using ServiceStation.Data.Services;
 
 namespace ServiceStation.Data.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class ServiceStationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200610150113_AddUserToOrder")]
+    partial class AddUserToOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
