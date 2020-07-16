@@ -42,8 +42,7 @@
                         @Html.DisplayFor(modelItem => item.Product.Name)
                     </td>
                     <td class="text-right">
-                        @*@item.Product.Price.ToString("c")*@
-                        @Html.DisplayFor(modelItem => item.Product.Price)
+                        @item.Product.Price.ToString("c")
                     </td>
                     <td class="text-right">
                         @((item.Amount * item.Product.Price).ToString("c"))

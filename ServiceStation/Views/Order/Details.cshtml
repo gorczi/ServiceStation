@@ -4,43 +4,57 @@
     ViewBag.Title = "Details";
 }
 
-<h1>Count: @Model.OrderDetails.Count()</h1>
+<h3>Order Number: @Html.DisplayFor(model => Model.OrderDetails.First().OrderId)</h3>
 
 <table class="table">
     @{var dummy = Model.OrderDetails.FirstOrDefault();}
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => dummy.Amount)
+                @Html.DisplayNameFor(model => dummy.Product.Manufacturer)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => dummy.Product.Name)
             </th>
             <th>
                 @Html.DisplayNameFor(model => dummy.Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => dummy.Product)
+                @Html.DisplayNameFor(model => dummy.Amount)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => dummy.Order)
-            </th>
+            <th class="text-right">Subtotal</th>
         </tr>
     </thead>
     <tbody>
         @foreach (var item in Model.OrderDetails)
         {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Amount)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Product.Manufacturer)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Order.OrderId)
-                </td>
-            </tr>
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Manufacturer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Product.Name)
+            </td>
+            <td>
+                @item.Product.Price.ToString("c")
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Amount)
+            </td>
+            <td class="text-right">
+                @((item.Amount * item.Product.Price).ToString("c"))
+            </td>
+        </tr>
         }
     </tbody>
+    <tfoot>
+        <tr>
+            <td colspan="4" class="text-right">Total:</td>
+            <td class="text-right">
+                @Model.OrderTotal.ToString("c")
+            </td>
+        </tr>
+    </tfoot>
 </table>
+<a class="btn btn-primary" asp-controller="Order" asp-action="MyOrders">Back to list</a>
