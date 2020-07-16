@@ -4,8 +4,19 @@
     ViewBag.Title = "Details";
 }
 
-<h3>Order Number: @Html.DisplayFor(model => Model.OrderDetails.First().OrderId)</h3>
-
+<h4>Order Number: @Html.DisplayFor(model => Model.OrderDetails.First().OrderId)</h4>
+<h5>Order placed: @Model.OrderPlaced</h5>
+<div>
+    <h5>Address:</h5>
+    <p>
+        @Model.Address.FirstName @Model.Address.LastName
+        <br />
+        @Model.Address.AddressLine1
+        <br />
+        @Model.Address.ZipCode @Model.Address.City
+        <br />
+    </p>
+</div>
 <table class="table">
     @{var dummy = Model.OrderDetails.FirstOrDefault();}
     <thead>
