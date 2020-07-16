@@ -83,9 +83,17 @@ namespace ServiceStation.Controllers
         [HttpGet]
         public async Task<IActionResult> Details(int id)
         {
+
             var user = await _userManager.GetUserAsync(HttpContext.User);
             var order = _orderRepository.GetOrder(id);
             var orderDetails = _orderRepository.GetOrderDetails(id);
+
+            var isOwner = user.Id == order.User.Id;
+
+            if (!isOwner)
+            {
+                return View("AccessDenied");
+            }
 
             var model = new OrderDetailsViewModel
             {
