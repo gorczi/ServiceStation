@@ -61,7 +61,8 @@ namespace ServiceStation.Controllers
                 _shoppingCart.ClearCart();
                 return RedirectToAction("CheckoutComplete");
             }
-            return View(order);
+
+            return await Checkout();
         }
 
         public IActionResult CheckoutComplete()
