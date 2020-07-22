@@ -19,7 +19,7 @@ namespace ServiceStation.Controllers
         [HttpGet]
         public IActionResult Index(string sortOrder)
         {
-            ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
+            ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "Manufacturer";
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
@@ -27,6 +27,9 @@ namespace ServiceStation.Controllers
             
             switch (sortOrder)
             {
+                case "Manufacturer":
+                    products = products.OrderBy(p => p.Manufacturer);
+                    break;
                 case "manufacturer_desc":
                     products = products.OrderByDescending(p => p.Manufacturer);
                     break;
