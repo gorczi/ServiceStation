@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using ServiceStation.Core.Shop;
 using ServiceStation.Data.Services;
+using System;
+using System.Linq;
 
 namespace ServiceStation.Controllers
 {
@@ -16,9 +18,49 @@ namespace ServiceStation.Controllers
             _productRepository = productRepository;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder)
         {
-            return View(_productRepository.GetAll());
+            ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
+            ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "Manufacturer";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            var products = _productRepository.GetAll();
+
+            switch (sortOrder)
+            {
+                case "id_desc":
+                    products = products.OrderByDescending(p => p.Id);
+                    break;
+                case "Manufacturer":
+                    products = products.OrderBy(p => p.Manufacturer);
+                    break;
+                case "manufacturer_desc":
+                    products = products.OrderByDescending(p => p.Manufacturer);
+                    break;
+                case "Name":
+                    products = products.OrderBy(p => p.Name);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(p => p.Name);
+                    break;
+                case "Category":
+                    products = products.OrderBy(p => p.Category);
+                    break;
+                case "category_desc":
+                    products = products.OrderByDescending(p => p.Category);
+                    break;
+                case "Price":
+                    products = products.OrderBy(p => p.Price);
+                    break;
+                case "price_desc":
+                    products = products.OrderByDescending(p => p.Price);
+                    break;
+                default:
+                    products = products.OrderBy(p => p.Id);
+                    break;
+            }
+            return View(products);
         }
 
         [HttpGet]

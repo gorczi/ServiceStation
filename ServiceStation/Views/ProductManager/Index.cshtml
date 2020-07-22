@@ -13,22 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["IdSortParm"]">@Html.DisplayNameFor(model => model.Id)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ManufacturerSortParm"]">@Html.DisplayNameFor(model => model.Manufacturer)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]">@Html.DisplayNameFor(model => model.Name)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Category)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CategorySortParm"]">@Html.DisplayNameFor(model => model.Category)</a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Price)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["PriceSortParm"]">@Html.DisplayNameFor(model => model.Price)</a>
             </th>
             <th></th>
         </tr>
@@ -40,12 +40,11 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Id)
                 </td>
-
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Manufacturer)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Description)
