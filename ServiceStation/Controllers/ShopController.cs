@@ -17,14 +17,22 @@ namespace ServiceStation.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string sortOrder)
+        public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "Manufacturer";
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["CurrentFilter"] = searchString;
+
             var products = _productRepository.GetAll();
-            
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products
+                    .Where(s => s.Manufacturer.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
+                                       || s.Name.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
+            }
+
             switch (sortOrder)
             {
                 case "Manufacturer":
