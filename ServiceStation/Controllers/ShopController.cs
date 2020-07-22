@@ -28,19 +28,19 @@ namespace ServiceStation.Controllers
             switch (sortOrder)
             {
                 case "manufacturer_desc":
-                    products = products.OrderByDescending(s => s.Manufacturer);
+                    products = products.OrderByDescending(p => p.Manufacturer);
                     break;
                 case "Name":
-                    products = products.OrderBy(s => s.Name);
+                    products = products.OrderBy(p => p.Name);
                     break;
                 case "name_desc":
-                    products = products.OrderByDescending(s => s.Name);
+                    products = products.OrderByDescending(p => p.Name);
                     break;
                 case "Category":
-                    products = products.OrderBy(s => s.Category);
+                    products = products.OrderBy(p => p.Category);
                     break;
                 case "category_desc":
-                    products = products.OrderByDescending(s => s.Category);
+                    products = products.OrderByDescending(p => p.Category);
                     break;
                 case "Price":
                     products = products.OrderBy(p => p.Price);
@@ -49,7 +49,7 @@ namespace ServiceStation.Controllers
                     products = products.OrderByDescending(p => p.Price);
                     break;
                 default:
-                    products = products.OrderBy(s => s.Manufacturer);
+                    products = products.OrderBy(p => p.Id);
                     break;
             }
             return View(products);
