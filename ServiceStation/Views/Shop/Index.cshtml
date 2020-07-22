@@ -13,7 +13,7 @@
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Manufacturer)
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["ManufacturerSortParm"]">@Html.DisplayNameFor(model => model.Manufacturer)</a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Description)
