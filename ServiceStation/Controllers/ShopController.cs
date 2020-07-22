@@ -20,7 +20,7 @@ namespace ServiceStation.Controllers
         public IActionResult Index(string sortOrder)
         {
             ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
-            //ViewData["DateSortParm"] = sortOrder == "Date" ? "date_desc" : "Date";
+            ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             var products = _productRepository.GetAll();
             
             switch (sortOrder)
@@ -28,12 +28,13 @@ namespace ServiceStation.Controllers
                 case "manufacturer_desc":
                     products = products.OrderByDescending(s => s.Manufacturer);
                     break;
-                //case "Date":
-                //    products = products.OrderBy(s => s.EnrollmentDate);
-                //    break;
-                //case "date_desc":
-                //    products = products.OrderByDescending(s => s.EnrollmentDate);
-                //    break;
+                case "Name":
+                    products = products.OrderBy(s => s.Name);
+                    break;
+                case "name_desc":
+                    products = products.OrderByDescending(s => s.Name);
+                    break;
+
                 default:
                     products = products.OrderBy(s => s.Manufacturer);
                     break;
