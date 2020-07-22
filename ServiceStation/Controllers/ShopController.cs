@@ -21,6 +21,7 @@ namespace ServiceStation.Controllers
         {
             ViewData["ManufacturerSortParm"] = String.IsNullOrEmpty(sortOrder) ? "manufacturer_desc" : "";
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
+            ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
             var products = _productRepository.GetAll();
             
             switch (sortOrder)
@@ -34,7 +35,12 @@ namespace ServiceStation.Controllers
                 case "name_desc":
                     products = products.OrderByDescending(s => s.Name);
                     break;
-
+                case "Category":
+                    products = products.OrderBy(s => s.Category);
+                    break;
+                case "category_desc":
+                    products = products.OrderByDescending(s => s.Category);
+                    break;
                 default:
                     products = products.OrderBy(s => s.Manufacturer);
                     break;
