@@ -1,10 +1,13 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ServiceStation.Core.Shop;
 using ServiceStation.Data.Services;
+using ServiceStation.Helpers;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace ServiceStation.Controllers
 {
@@ -18,13 +21,28 @@ namespace ServiceStation.Controllers
             _productRepository = productRepository;
         }
 
-        public IActionResult Index(string sortOrder, string searchString)
+        public async Task<IActionResult> Index(
+            string sortOrder,
+            string currentFilter,
+            string searchString,
+            int? pageNumber)
         {
+            ViewData["CurrentSort"] = sortOrder;
             ViewData["IdSortParm"] = String.IsNullOrEmpty(sortOrder) ? "id_desc" : "";
             ViewData["ManufacturerSortParm"] = sortOrder == "Manufacturer" ? "manufacturer_desc" : "Manufacturer";
             ViewData["NameSortParm"] = sortOrder == "Name" ? "name_desc" : "Name";
             ViewData["CategorySortParm"] = sortOrder == "Category" ? "category_desc" : "Category";
             ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+
+            if (searchString != null)
+            {
+                pageNumber = 1;
+            }
+            else
+            {
+                searchString = currentFilter;
+            }
+
             ViewData["CurrentFilter"] = searchString;
 
             var products = _productRepository.GetAll();
@@ -68,7 +86,9 @@ namespace ServiceStation.Controllers
                     products = products.OrderBy(p => p.Id);
                     break;
             }
-            return View(products);
+            int pageSize = 10;
+
+            return View(await PaginatedList<Product>.CreateAsync(products.AsNoTracking(), pageNumber ?? 1, pageSize));
         }
 
         [HttpGet]
