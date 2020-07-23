@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using ServiceStation.Core.Shop;
 
@@ -36,7 +37,7 @@ namespace ServiceStation.Data.Services
             return db.Products.Find(id);
         }
 
-        public IEnumerable<Product> GetAll()
+        public IQueryable<Product> GetAll()
         {
             return db.Products;
         }
