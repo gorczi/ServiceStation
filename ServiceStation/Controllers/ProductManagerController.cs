@@ -49,8 +49,8 @@ namespace ServiceStation.Controllers
             if (!String.IsNullOrEmpty(searchString))
             {
                 products = products
-                    .Where(s => s.Manufacturer.Contains(searchString, StringComparison.InvariantCultureIgnoreCase)
-                                       || s.Name.Contains(searchString, StringComparison.InvariantCultureIgnoreCase));
+                    .Where(s => s.Manufacturer.Contains(searchString)
+                                       || s.Name.Contains(searchString));
             }
 
             switch (sortOrder)
